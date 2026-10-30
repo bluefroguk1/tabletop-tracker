@@ -28,16 +28,49 @@
 
 * { box-sizing: border-box; }
 
+html {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-text-size-adjust: 100%;
+  overscroll-behavior: none;
+}
+
 body {
   background: var(--color-bg);
   color: var(--color-text);
   font-family: system-ui, -apple-system, sans-serif;
-  -webkit-tap-highlight-color: transparent;
   min-height: 100dvh;
   margin: 0;
 }
 
 #root { min-height: 100dvh; }
+
+/* prevent input zoom on iOS — 16px minimum, no user-scalable=no needed */
+input, textarea, select {
+  font-size: 16px;
+}
+
+/* fire click immediately; no 300ms double-tap wait */
+button, a, [role="button"] {
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+}
+
+/* safe area padding for bottom bars / sheets */
+.safe-bottom {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+.safe-top {
+  padding-top: env(safe-area-inset-top, 0px);
+}
+
+/* hover only on devices that actually hover */
+@media (hover: hover) and (pointer: fine) {
+  button:hover, a:hover, [role="button"]:hover {
+    opacity: 0.85;
+  }
+}
 
 button:focus-visible, a:focus-visible, [tabindex="0"]:focus-visible {
   outline: 2px solid var(--color-accent);

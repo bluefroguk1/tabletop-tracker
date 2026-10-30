@@ -59,7 +59,7 @@ export function Game() {
   return (
     <div className="min-h-dvh flex flex-col max-w-lg mx-auto">
       {/* header */}
-      <header className="flex items-center gap-2 px-4 py-3 border-b border-[var(--color-border)] sticky top-0 bg-[var(--color-bg)] z-10">
+      <header className="safe-top flex items-center gap-2 px-4 py-3 border-b border-[var(--color-border)] sticky top-0 bg-[var(--color-bg)] z-10">
         <div className="flex-1 min-w-0">
           <div className="font-semibold truncate">{game.config.name || 'Game'}</div>
           <div className="text-[var(--color-muted)] text-xs">Round {game.currentRound} of {game.config.rounds}</div>
@@ -72,7 +72,7 @@ export function Game() {
         )}
       </header>
 
-      <div className="flex-1 overflow-y-auto p-4 flex flex-col gap-4">
+      <div className="flex-1 overflow-y-auto p-4 pb-[calc(1rem+env(safe-area-inset-bottom,0px))] flex flex-col gap-4" style={{ overscrollBehavior: 'contain' }}>
         {/* active player */}
         <div className="bg-[var(--color-surface)] rounded-2xl border border-[var(--color-accent)] p-4">
           <div className="flex items-center gap-3 mb-4">
